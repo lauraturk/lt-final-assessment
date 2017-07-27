@@ -29,8 +29,21 @@ app.get('/api/v1/inventory', (req, res) => {
       res.status(200).json(items);
     })
     .catch((error) => {
-      res.status(500).json({ 'Internal Server Error': error });
+      res.status(404).json({ 'Does not exist': error });
     });
+});
+
+app.post('/api/v1/orders', (req, res) => {
+  const { order_total } = req.body
+  const order_date = moment().format('YYYYMMDD')
+
+  database('orders')
+    .returning(['order_total', 'order_date'])
+    .insert({ order_total, order_date })
+      .then((insertedValues) => {
+        res.status(201).json(insertedValues[0]);
+      })
+      .catch((err) => res.json({"error": err}))
 });
 
 app.listen(app.get('port'), () => {
