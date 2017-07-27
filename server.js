@@ -43,7 +43,9 @@ app.post('/api/v1/orders', (req, res) => {
       .then((insertedValues) => {
         res.status(201).json(insertedValues[0]);
       })
-      .catch((err) => res.json({"error": err}))
+      .catch((err) => {
+        res.status(400).json({"malformed request": err})
+      });
 });
 
 app.listen(app.get('port'), () => {
