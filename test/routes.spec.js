@@ -31,8 +31,8 @@ describe('Client Routes', () => {
     .end((err, res) => {
       res.should.have.status(404);
       done();
-    })
-  })
+    });
+  });
 });
 
 describe('API Routes', () => {
@@ -57,12 +57,35 @@ describe('API Routes', () => {
       res.should.have.status(200);
       res.should.be.json;
       res.should.be.a('object');
-      res.body.length.should.equal(2);
       res.body[0].should.have.property('item_title');
       res.body[0].should.have.property('item_description');
       res.body[0].should.have.property('item_image');
       res.body[0].should.have.property('item_price');
       done();
-    })
-  })
-})
+    });
+  });
+
+  it('should post an order and return the total and date', (done) => {
+    chai.request(server)
+    .post('/api/v1/orders')
+    .send({"order_total": "3.00"})
+    .end((err, res) => {
+      res.should.have.status(201);
+      res.should.be.json;
+      res.should.be.a('object');
+      res.body.should.have.property('order_total');
+      res.body.should.have.property('order_date');
+      done();
+    });
+  });
+
+  it('should return an error if route does not exist', (done) => {
+    chai.request(server)
+    .post('/api/v1/orders/new')
+    .send({})
+    .end((err, res) => {
+      res.should.have.status(404);
+      done();
+    });
+  });
+});
