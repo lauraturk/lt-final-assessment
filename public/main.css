@@ -1,0 +1,25 @@
+.inventory {
+  height: 500px;
+  margin: 100px auto;
+}
+
+.item-card {
+  display: inline-block;
+  margin: 10px;
+}
+
+.panel-name {
+  display: inline;
+}
+
+.cart-number {
+  background-color: lightblue;
+  border-radius: 50%;
+  color: blue;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 2em;
+}
