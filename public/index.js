@@ -13,11 +13,10 @@ const renderItems = (inventoryItems) => {
 return itemsToPrint
 };
 
-const renderOrderHistory = (historyItems) => {
-  console.log(historyItems)
-  const historyToPrint = historyItems.map((item) => {
-    return `<li>${item.total_price}`
-  })
+const renderOrderHistory = (item) => {
+  const historyToPrint = `<li>${item.order_total} on ${item.order_date}</li>`
+
+  $('#order-history').append(historyToPrint)
 }
 
 const retrieveItems = () => {
@@ -77,10 +76,12 @@ const showBox = (box) => {
 };
 
 const showOrder = () => {
-  console.log('do a fetch here for the orders')
+
 };
 
 const showCart = () => {
+  $("#cart-list").empty();
+
   const listItems = JSON.parse(localStorage.getItem("Cart"));
 
   const printList = listItems.map((item) => {
