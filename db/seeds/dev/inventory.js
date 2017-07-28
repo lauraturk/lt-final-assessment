@@ -1,4 +1,3 @@
-
 exports.seed = function(knex, Promise) {
   return knex('inventory').del()
     .then(() => knex('orders').del())

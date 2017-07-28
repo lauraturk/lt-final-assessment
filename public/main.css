@@ -1,25 +1,95 @@
+body {
+  text-align: center;
+  margin: 0;
+}
+
+.main-wrapper {
+  display: flex;
+  padding: 50px;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background-color: whitesmoke;
+  height: 40px;
+  width: 100%;
+}
+
+button:hover {
+  box-shadow: 2px 2px 1px magenta;
+}
+
+li {
+  list-style: none;
+}
+
 .inventory {
-  height: 500px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin: 100px auto;
+  width: 70%;
 }
 
 .item-card {
-  display: inline-block;
+  border: 1px solid moccasin;
+  box-shadow: 4px 4px 1px 1px moccasin;
   margin: 10px;
+  padding: 10px;
+  width: 280px;
+  text-align: center;
 }
 
 .panel-name {
   display: inline;
+  padding: 15px;
+}
+
+.order-history, .cart-list, .cart-total {
+  padding: 15px;
 }
 
 .cart-number {
-  background-color: lightblue;
-  border-radius: 50%;
   color: blue;
-  display: inline-block;
-  height: 100px;
-  width: 100px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 2em;
+  display: inline;
+  font-size: 1em;
+  padding: 5px;
+}
+
+.hide {
+  border: 1px solid cornflowerblue;
+  background-color: rgba(10, 10, 70, 0.6);
+  color: whitesmoke;
+  line-height: 1em;
+  opacity: 0;
+}
+
+#cart-toggle {
+  position: relative;
+  text-align: right;
+  width: 15%;
+}
+
+#cart-toggle .show {
+  opacity: 1;
+  transition: all 1s ease;
+  transform: translateX(-200px);
+  width: 300px;
+}
+
+#order-toggle {
+  position: relative;
+  text-align: left;
+  width: 15%;
+}
+
+#order-toggle .show {
+  opacity: 1;
+  transition: all 1s ease;
+  transform: translateX(50px);
+  width: 300px;
 }

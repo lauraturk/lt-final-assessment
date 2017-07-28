@@ -14,7 +14,9 @@ return itemsToPrint
 };
 
 const renderOrderHistory = (item) => {
-  const historyToPrint = `<li>${item.order_total} on ${item.order_date}</li>`
+  const cleanDate = item.order_date.slice(0,10)
+
+  const historyToPrint = `<li>$${item.order_total} on ${cleanDate}</li>`
 
   $('#order-history').append(historyToPrint)
 }
@@ -72,7 +74,7 @@ const addToCart = (selectedItem) => {
 };
 
 const showBox = (box) => {
-  $(`#${box}`).children().toggleClass("show")
+  $(`#${box}`).children().not('.cart-number, svg').toggleClass("show")
 };
 
 const showOrder = () => {
