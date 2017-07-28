@@ -1,25 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="./main.css">
     <title>LT- Final Assessment</title>
-  </head>
-  <body>
-      <aside id="order-toggle">
-        <svg width="23" height="22" viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg">
+</head>
+
+<body>
+    <h1>Items For Sale</h1>
+    <section class="main-wrapper">
+        <aside id="order-toggle">
+            <svg width="23" height="22" viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#3C3F44" stroke-width="2" fill="none" fill-rule="evenodd">
             <path d="M1 5h19.008c.548 0 .992.445.992 1v14c0 .552-.455 1-.992 1H1.992C1.444 21 1 20.555 1 20V5z" fill="#FFF"/>
             <path d="M1 3c0-1.105.897-2 2.006-2H15v2.99C15 4.55 14.55 5 13.993 5H2.007C1.45 5 1 4.557 1 3.99V3z" fill="#B3BAC3"/>
             <path d="M22 10h-4.994C15.898 10 15 10.898 15 11.998v2.004c0 1.104.887 1.998 2.006 1.998H22v-6z" fill="#FFF"/>
           </g>
         </svg>
-        <h3 class="panel-name">Order History</h3>
-        <ul id="order-history"></ul>
-      </aside>
-      <aside id="cart-toggle">
-        <svg width="23" height="22" viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg">
+            <div class="hide">
+                <h3 class="panel-name">Order History</h3>
+                <ul id="order-history"></ul>
+            </div>
+        </aside>
+        <main id="inventory-holder" class="inventory"></main>
+        <aside id="cart-toggle">
+            <svg width="23" height="22" viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fill-rule="evenodd">
             <path d="M5 5h16.18c.552 0 .91.43.8.977l-1.643 8.046c-.11.54-.653.977-1.193.977H5.994c-.55 0-.994-.456-.994-.995V5z" stroke="#3C3F44" stroke-width="2" fill="#FFF"/>
             <path fill="#B3BAC3" d="M6 10h14v4H6z"/>
@@ -29,15 +36,17 @@
             <circle fill="#3C3F44" cx="19.5" cy="19.5" r="2.5"/>
           </g>
         </svg>
-        <div class="cart-number">0</div>
-        <div class="cart-total">$0.00</div>
-        <h3 class="panel-name">Shopping Cart</h3>
-        <ul id="cart-list" class="cart-list"></ul>
-        <button id="buy-btn">one click shopping</button>
-      </aside>
-      <h1>Items For Sale</h1>
-      <main id="inventory-holder" class="inventory"></main>
-  </body>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="./index.js"></script>
+            <p class="cart-number">0</p>
+            <div class="hide">
+                <h3 class="panel-name">Shopping Cart</h3>
+                <ul id="cart-list" class="cart-list"></ul>
+                <div class="cart-total">Total: $0.00</div>
+                <button id="buy-btn">one click shopping</button>
+            </div>
+        </aside>
+    </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+
 </html>
