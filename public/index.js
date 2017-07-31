@@ -145,8 +145,7 @@ $('#buy-btn').on('click', () => {
 });
 
 $(document).ready(() => {
-  if(localStorage.length > 0){
-    setCartDetails();
-  }
-  return retrieveItems();
+  setCartDetails();
+  retrieveOrders();
+  retrieveItems();
 });
