@@ -33,9 +33,28 @@ app.get('/api/v1/inventory', (req, res) => {
     });
 });
 
+app.get('/api/v1/orders', (req, res) => {
+  database('orders').select()
+    .then((orders) => {
+      res.status(200).json(orders);
+    })
+    .catch((error) => {
+      res.status(404).json({ 'Does not exist': error });
+    });
+});
+
 app.post('/api/v1/orders', (req, res) => {
   const { order_total } = req.body
   const order_date = moment().format('YYYYMMDD')
+
+  for(let requiredParameter of ['order_total']){
+    if(!req.body[requiredParameter]){
+      return res.status(422).json({
+        error: `Expected format requires a Folder Name, a URL Title, and a URL.
+        You are missing a ${requiredParameter} property`
+      })
+    }
+  }
 
   database('orders')
     .returning(['order_total', 'order_date'])
@@ -44,7 +63,7 @@ app.post('/api/v1/orders', (req, res) => {
         res.status(201).json(insertedValues[0]);
       })
       .catch((err) => {
-        res.status(400).json({"malformed request": err})
+        res.status(500).json({"Server Error": err})
       });
 });
 

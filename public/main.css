@@ -33,6 +33,7 @@ li {
   justify-content: space-around;
   margin: 100px auto;
   width: 70%;
+  z-index: 0;
 }
 
 .item-card {
@@ -89,7 +90,9 @@ li {
 
 #order-toggle .show {
   opacity: 1;
+  position: relative;
   transition: all 1s ease;
   transform: translateX(50px);
   width: 300px;
+  z-index: 1;
 }

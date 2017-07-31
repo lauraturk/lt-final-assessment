@@ -13,13 +13,21 @@ const renderItems = (inventoryItems) => {
 return itemsToPrint
 };
 
-const renderOrderHistory = (item) => {
-  const cleanDate = item.order_date.slice(0,10)
+const renderOrderHistory = (orders) => {
+  $("#order-history").empty();
 
-  const historyToPrint = `<li>$${item.order_total} on ${cleanDate}</li>`
+  const historyToPrint = orders.map((order) => {
+    const cleanDate = order.order_date.slice(0,10);
+    return `<li>$${order.order_total} on ${cleanDate}</li>`
+  });
+  return historyToPrint
+};
 
-  $('#order-history').append(historyToPrint)
-}
+const clearCart = () => {
+  $("#cart-list").empty();
+  localStorage.removeItem("Cart");
+  setCartDetails();
+};
 
 const retrieveItems = () => {
   fetch('/api/v1/inventory', {
@@ -32,6 +40,16 @@ const retrieveItems = () => {
   .catch(error => console.log(error));
 };
 
+const retrieveOrders = () => {
+  fetch('/api/v1/orders', {
+    method: 'GET'
+  })
+  .then(data => data.json())
+  .then(orderData => {
+    $("#order-history").append(renderOrderHistory(orderData));
+  })
+}
+
 const orderItems = (body) => {
   fetch('/api/v1/orders', {
     method: 'POST',
@@ -40,22 +58,29 @@ const orderItems = (body) => {
   })
   .then(data => data.json())
   .then(orderData => {
-    $("#order-history").append(renderOrderHistory(orderData))
-  })
-
+    clearCart();
+    retrieveOrders();
+  });
 }
 
 const setCartDetails = () => {
   const cart = JSON.parse(localStorage.getItem("Cart"))
-  const cartNumber = cart.length
 
-  const cartTotal = cart.reduce((sum, value) => {
-    return sum + parseInt(value.price);
-  }, 0)
+  if (!cart) {
+    $('.cart-total').text(`$0.00`);
 
-  $('.cart-total').text(`$${cartTotal}.00`);
+    $('.cart-number').text(0);
+  } else {
+    const cartNumber = cart.length
 
-  $('.cart-number').text(cartNumber);
+    const cartTotal = cart.reduce((sum, value) => {
+      return sum + parseInt(value.price);
+    }, 0)
+
+    $('.cart-total').text(`$${cartTotal}.00`);
+
+    $('.cart-number').text(cartNumber);
+  }
 }
 
 const addToCart = (selectedItem) => {
@@ -78,7 +103,7 @@ const showBox = (box) => {
 };
 
 const showOrder = () => {
-
+  retrieveOrders();
 };
 
 const showCart = () => {
@@ -86,11 +111,13 @@ const showCart = () => {
 
   const listItems = JSON.parse(localStorage.getItem("Cart"));
 
-  const printList = listItems.map((item) => {
-    return `<li>${item.title} @ ${item.price}</li>`
-  })
+  if(listItems) {
+    const printList = listItems.map((item) => {
+      return `<li>${item.title} @ ${item.price}</li>`
+    })
 
-  $("#cart-list").append(printList);
+    $("#cart-list").append(printList);
+  }
 };
 
 $('#inventory-holder').on('click', '.item-card', function(e){
