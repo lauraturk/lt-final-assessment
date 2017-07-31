@@ -65,6 +65,17 @@ describe('API Routes', () => {
     });
   });
 
+  it('should return the orders', (done) => {
+    chai.request(server)
+    .get('/api/v1/orders')
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.should.be.json;
+      res.should.be.a('object');
+      done();
+    });
+  });
+
   it('should post an order and return the total and date', (done) => {
     chai.request(server)
     .post('/api/v1/orders')
@@ -79,12 +90,12 @@ describe('API Routes', () => {
     });
   });
 
-  it('should return an error if route does not exist', (done) => {
+  it('should return an error if required params are not supplied', (done) => {
     chai.request(server)
-    .post('/api/v1/orders/new')
+    .post('/api/v1/orders')
     .send({})
     .end((err, res) => {
-      res.should.have.status(404);
+      res.should.have.status(422);
       done();
     });
   });
